@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Home from "./Home";
 import PizzaForm from "./PizzaForm";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 
 const StyledDiv = styled.div`
@@ -53,16 +54,26 @@ const App = () => {
     schema.isValid(formData).then(valid=> setDisabled(!valid))
   },[formData])
   //!useEffect
+  const navigate = useNavigate();
+  const nav = evt => {
+      navigate("/pizza")
+  }
   return (
     <>
-      <Link to = "/">Home</Link>
+        <div>
+            <h1>BloomEats</h1>
+            <button onClick={nav}>Order Now</button>
+        </div>
       <Link   id = "order-pizza" to = "pizza">Order Now</Link>
       <Routes>
-        <Route path = "/" element = {<Home />}/>
         <Route path = "pizza" element = {<PizzaForm change = {change} 
         disabled ={disabled} formData = {formData} submit = {submit}
         formErrors = {formErrors}
         />}/>
+        {/* <Route path = "/" element = {<div>
+            <h1>BloomEats</h1>
+            <button onClick={nav}>Order Now</button>
+        </div>} /> */}
       </Routes>
     </>
   );
