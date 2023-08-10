@@ -9,6 +9,7 @@ import * as yup from "yup";
 
 export default function Pizza(props) {
     const { disabled, formData, change, submit, formErrors } = props;
+    const {name,size,topping1,topping2,topping3,topping4,special} = formData;
     return (
         <div>
             <form onSubmit={submit} id="pizza-form">
@@ -28,7 +29,32 @@ export default function Pizza(props) {
                  </select>
                  {formErrors.size && <p style = {{color : 'red'}}>{formErrors.size}</p>}
 
-                <input disabled={disabled} type="submit" id="order-button" />
+                 <label htmlFor = "topping1">Pepperoni</label>
+                 <input type = "checkbox" id = "topping1" 
+                 checked = {topping1}
+                  name = "topping1" onChange={change} value = "pepperoni"
+                  />
+                
+                <label htmlFor="sausage">Sausage</label>
+                <input type = "checkbox" id = "sausage" name = "topping2" 
+                checked = {topping2} 
+                value = "sausage"onChange={change} />
+
+                <label htmlFor="bacon">Bacon</label>
+                <input type = "checkbox" id = "bacon" name = "topping3" 
+                onChange={change} checked = {topping3}
+                value = "bacon"/>
+
+                <label htmlFor="mushshrooms">Mushshrooms</label>
+                <input type = "checkbox" name = "topping4" id = "mushshrooms" 
+                onChange={change} checked = {topping4}
+                value = "mushshrooms"/> 
+
+                <label htmlFor = "special-text">Special instructions</label>
+                <input id = "special-text" type = "text" placeholder="special instructions"
+                name = "special" value = {special} onChange={change}  />
+
+                <input disabled={disabled} type="submit" id="order-button" value = "Add to Order"/>
             </form>
         </div>
     )

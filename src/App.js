@@ -13,12 +13,18 @@ const StyledDiv = styled.div`
 const schema = yup.object().shape({
   name : yup.string().required("Name is required").min(2,"name must be at least 2 characters"),
   size : yup.string().oneOf(["small","medium","large"],"Must pick a size"),
+  topping1 : yup.boolean(),
+  topping2 : yup.boolean(),
+  topping3 : yup.boolean(),
+  topping4 : yup.boolean(),
+  special : yup.string(),
 })
 
 const App = () => {
   //!slices of state
-  const [formData,setFormData] = useState({name : "", size : "", topping1 : false, topping2 : false, special : ""})
-  const [formErrors,setFormErrors] = useState({name : "", size : "", topping1 : "", topping2 : "", special : ""})
+  const [formData,setFormData] = useState({name : "", size : "", topping1 : false, topping2 : false,
+  topping3 : false,topping4 : false, special : ""})
+  const [formErrors,setFormErrors] = useState({name : "", size : ""})
   const [disabled, setDisabled] = useState(true)
   //!slices of state
   //!handlers
@@ -28,13 +34,18 @@ const App = () => {
       .catch(err=> setFormErrors({...formErrors, [name] : err.errors[0]}))
   }
   const change = evt => {
-    const {name,value, checked} = evt.target;
-    const valueToUse = evt.target.type === "checkbox" ? checked : value;
+    const {name,value,type,checked} = evt.target;
+    const valueToUse = type === "checkbox" ? checked : value;
     formValidation(name,valueToUse);
     setFormData({...formData, [name] : valueToUse}); 
   }
   const submit = evt => {
     evt.preventDefault();
+    // const newFriend = {
+    //   name : formData.name,
+    //   size : formData.size,
+    //   topping1 : formData.topping1,
+    // }
   }
   //!handlers
   //!useEffect
