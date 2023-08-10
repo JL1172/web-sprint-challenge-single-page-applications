@@ -6,14 +6,13 @@ import Home from "./Home";
 import PizzaForm from "./PizzaForm";
 import * as yup from "yup";
 
-const size = ["small","medium","large"]
 
 const StyledDiv = styled.div`
 
 `
 const schema = yup.object().shape({
-  name : yup.string().min(2,"name must be at least 2 characters"),
-  size : yup.boolean.oneOf(size,"Must pick a size")
+  name : yup.string().required("Name is required").min(2,"name must be at least 2 characters"),
+  size : yup.string().oneOf(["small","medium","large"],"Must pick a size"),
 })
 
 const App = () => {

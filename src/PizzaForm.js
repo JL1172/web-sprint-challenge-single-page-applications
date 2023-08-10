@@ -18,14 +18,15 @@ export default function Pizza(props) {
                     type="text" placeholder="name"
                 />
                 {formErrors.name && <p style={{ color: "red" }}>{formErrors.name}</p>}
-                
-                {/* <label htmlFor="size-dropdown">Select Pizza Size</label>
-                 <select value = {formData.size} onChange={change} id = "size-dropdown">
+
+                <label htmlFor="size-dropdown">Select Pizza Size</label>
+                 <select value = {formData.size} onChange={change} id = "size-dropdown" name = "size">
                     <option value = "">--Select One--</option>
                     <option value = "small">Small</option>
                     <option value = "medium">Medium</option>
                     <option value = "large">Large</option>
-                 </select> */}
+                 </select>
+                 {formErrors.size && <p style = {{color : 'red'}}>{formErrors.size}</p>}
 
                 <input disabled={disabled} type="submit" id="order-button" />
             </form>
