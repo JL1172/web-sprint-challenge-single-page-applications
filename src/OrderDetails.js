@@ -2,17 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, Route, Routes } from "react-router-dom"
 import styled from "styled-components";
-import PizzaForm from "./PizzaForm";
-import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import OrderDetails from "./OrderDetails";
+import * as yup from "yup";
 
-
-export default function Home(props) {
-    const {nav} = props;
+export default function OrderDetails(props) {
     return (
         <div>
-             <button onClick={nav}>Order Now</button>
+            order details 
         </div>
     )
 }

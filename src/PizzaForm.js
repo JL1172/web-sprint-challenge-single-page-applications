@@ -10,6 +10,10 @@ import * as yup from "yup";
 export default function Pizza(props) {
     const { disabled, formData, change, submit, formErrors } = props;
     const {name,size,topping1,topping2,topping3,topping4,special} = formData;
+    const navigate = useNavigate();
+    const nav = () => {
+        navigate("order-detail")
+    }
     return (
         <div>
             <form onSubmit={submit} id="pizza-form">
@@ -54,7 +58,7 @@ export default function Pizza(props) {
                 <input id = "special-text" type = "text" placeholder="special instructions"
                 name = "special" value = {special} onChange={change}  />
 
-                <input disabled={disabled} type="submit" id="order-button" value = "Add to Order"/>
+                <input onClick = {nav}disabled={disabled} type="submit" id="order-button" value = "Add to Order"/>
             </form>
         </div>
     )

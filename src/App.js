@@ -2,14 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, Route, Routes } from "react-router-dom"
 import styled from "styled-components";
-import Home from "./Home";
 import PizzaForm from "./PizzaForm";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-
+import OrderDetails from "./OrderDetails";
+import Home from "./Home";
 
 const StyledDiv = styled.div`
-
+background-image : linear-gradient(to right, rgb(226, 146, 146),white);
 `
 const schema = yup.object().shape({
   name : yup.string().required("Name is required").min(2,"name must be at least 2 characters"),
@@ -60,20 +60,17 @@ const App = () => {
   }
   return (
     <>
-        <div>
+    <StyledDiv>
+          <Link to = "/">Home</Link>
             <h1>BloomEats</h1>
-            <button onClick={nav}>Order Now</button>
-        </div>
-      <Link   id = "order-pizza" to = "pizza">Order Now</Link>
+        </StyledDiv>
       <Routes>
-        <Route path = "pizza" element = {<PizzaForm change = {change} 
+        <Route path = "pizza/*" element = {<PizzaForm change = {change} 
         disabled ={disabled} formData = {formData} submit = {submit}
         formErrors = {formErrors}
         />}/>
-        {/* <Route path = "/" element = {<div>
-            <h1>BloomEats</h1>
-            <button onClick={nav}>Order Now</button>
-        </div>} /> */}
+        <Route path ="pizza/order-detail" element = {<OrderDetails />} />
+        <Route path = "/" element = {<Home nav = {nav}/>}/>
       </Routes>
     </>
   );
