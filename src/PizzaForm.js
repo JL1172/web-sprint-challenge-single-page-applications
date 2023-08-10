@@ -8,16 +8,17 @@ import * as yup from "yup";
 
 
 export default function Pizza(props) {
-    const {disabled,formData,change,submit} = props;
+    const {disabled,formData,change,submit,formErrors} = props;
     return (
         <div>
             <form onSubmit = {submit} id = "pizza-form">
                 <label htmlFor="name-input">Name : </label>
                 <input onChange={change} value = {formData.name}
-                 id = "name-input" name-input = "name-input" 
+                 id = "name-input" name = "name" 
                  type = "text" placeholder="name"
                  />
-                 <input type = "submit" id = "order-button"/>
+                 {formErrors.name && <p style = {{color : "red"}}>{formErrors.name}</p>}
+                 <input disabled = {disabled} type = "submit" id = "order-button"/>
             </form>
         </div>
     )

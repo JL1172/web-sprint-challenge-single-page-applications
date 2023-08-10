@@ -48,6 +48,7 @@ const App = () => {
         <Route path = "/" element = {<Home />}/>
         <Route path = "pizza" element = {<PizzaForm change = {change} 
         disabled ={disabled} formData = {formData} submit = {submit}
+        formErrors = {formErrors}
         />}/>
       </Routes>
     </>
