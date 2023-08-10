@@ -17,6 +17,15 @@ export default function Pizza(props) {
                  id = "name-input" name = "name" 
                  type = "text" placeholder="name"
                  />
+
+                 <label htmlFor="size-dropdown">Select Pizza Size</label>
+                 <select value = {formData.size} onChange={change} id = "size-dropdown">
+                    <option value = "">--Select One--</option>
+                    <option value = "small">Small</option>
+                    <option value = "medium">Medium</option>
+                    <option value = "large">Large</option>
+
+                 </select>
                  {formErrors.name && <p style = {{color : "red"}}>{formErrors.name}</p>}
                  <input disabled = {disabled} type = "submit" id = "order-button"/>
             </form>
