@@ -56,7 +56,7 @@ const App = () => {
   return (
     <>
       <Link  id = "order-pizza" to = "/">Home</Link>
-      <Link to = "pizza">Order Now</Link>
+      <Link   id = "order-pizza" to = "pizza">Order Now</Link>
       <Routes>
         <Route path = "/" element = {<Home />}/>
         <Route path = "pizza" element = {<PizzaForm change = {change} 
