@@ -55,7 +55,7 @@ const App = () => {
   //!useEffect
   return (
     <>
-      <Link  id = "order-pizza" to = "/">Home</Link>
+      <Link to = "/">Home</Link>
       <Link   id = "order-pizza" to = "pizza">Order Now</Link>
       <Routes>
         <Route path = "/" element = {<Home />}/>
