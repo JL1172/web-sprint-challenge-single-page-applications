@@ -25,6 +25,8 @@ div {
 }
 img {
     height : 200px;
+    width : 200px;
+    margin-left : 23rem;
     margin-bottom : 3rem;
 }
 input {
