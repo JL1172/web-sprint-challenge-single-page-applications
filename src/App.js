@@ -116,7 +116,7 @@ function App() {
   return (
     <>
       <StyledDiv>
-        <Link to="/"><img src="https://www.svgrepo.com/show/347172/menu-4.svg" /></Link>
+        <Link to="/"><img data-cy ="homeButton" src="https://www.svgrepo.com/show/347172/menu-4.svg" /></Link>
         <h1>BloomEats</h1>
       </StyledDiv>
       <Routes>

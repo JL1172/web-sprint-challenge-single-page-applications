@@ -1,5 +1,101 @@
-describe('template spec', () => {
-  it('passes', () => {
-    cy.visit('https://example.cypress.io')
+const sizeArr = ["small", "medium", "large"]
+describe("My first tests", () => {
+  it("Visits the page and verifies URL", () => {
+    cy.visit("http://localhost:3000")
+    cy.contains("Order Now").click()
+    cy.url().should("include", "/pizza")
   })
 })
+describe("My second tests", () => {
+  it("Checks to make sure errors are correct", () => {
+    cy.visit("http://localhost:3000/pizza")
+    cy.get("[data-cy='name']").type("ja").clear()
+    cy.get("[data-cy='nameErr']").should("have.text", "Name is required")
+    sizeArr.map((n) => {
+      cy.get("[data-cy='size']").select(n)
+      cy.get("[data-cy='size']").select("--Select One--")
+      cy.get("[data-cy='sizeErr']").should("have.text", "Must pick a size")
+    })
+  })
+})
+describe("My third tests",()=> {
+  it("Fills out form, ensures all features work properly",()=> {
+    cy.visit("http://localhost:3000/pizza")
+     cy.get("[data-cy='name']").type("jacob lang")
+     cy.get("[data-cy='nameErr']").should("not.exist")
+     sizeArr.map((n) => {
+      cy.get("[data-cy='size']").select(n)
+      cy.get("[data-cy='sizeErr']").should("not.exist")
+    })
+    cy.get("[data-cy='top1']").click()
+    cy.get("[data-cy='top2']").click()
+    cy.get("[data-cy='top3']").click()
+    cy.get("[data-cy='top4']").click()
+    cy.get("[data-cy='special']").type("Leave by outside door")
+    cy.get("[data-cy='submit']").click()
+    cy.url().should("include","/order-detail")
+})})
+describe("My fourth tests",()=> {
+  it("Visits the page after submission and verifies all features work",()=> {
+    cy.visit("http://localhost:3000/pizza")
+     cy.get("[data-cy='name']").type("jacob lang")
+     cy.get("[data-cy='name']").should("have.value","jacob lang")
+     cy.get("[data-cy='nameErr']").should("not.exist")
+     sizeArr.map((n) => {
+      cy.get("[data-cy='size']").select(n)
+      cy.get("[data-cy='size']").should("have.value",n)
+      cy.get("[data-cy='sizeErr']").should("not.exist")
+    })
+    cy.get("[data-cy='top1']").click()
+    cy.get("[data-cy='top2']").click()
+    cy.get("[data-cy='top3']").click()
+    cy.get("[data-cy='top4']").click()
+    cy.get("[data-cy='special']").type("Leave by outside door")
+    cy.get("[data-cy='submit']").click()
+    cy.get("[data-cy='visible']").should("not.exist")
+    cy.get("[data-cy='expand']").click()
+    cy.get("[data-cy='visible']").should("exist")
+    cy.get("[data-cy='expand']").click()
+    cy.get("[data-cy='visible']").should("not.exist")
+  })
+})
+describe("My fifth tests",()=> {
+  it("Verifies the home button works",()=> {
+    cy.visit("http://localhost:3000/pizza")
+     cy.get("[data-cy='name']").type("jacob lang")
+     cy.get("[data-cy='name']").should("have.value","jacob lang")
+     cy.get("[data-cy='nameErr']").should("not.exist")
+     sizeArr.map((n) => {
+      cy.get("[data-cy='size']").select(n)
+      cy.get("[data-cy='size']").should("have.value",n)
+      cy.get("[data-cy='sizeErr']").should("not.exist")
+    })
+    cy.get("[data-cy='top1']").click()
+    cy.get("[data-cy='top2']").click()
+    cy.get("[data-cy='top3']").click()
+    cy.get("[data-cy='top4']").click()
+    cy.get("[data-cy='special']").type("Leave by outside door")
+    cy.get("[data-cy='submit']").click()
+    cy.wait(1000).get("[data-cy='homeButton']").click()
+    cy.url().should("include","/")
+  })})
+  describe("My fifth tests",()=> {
+    it("Verifies the home button works",()=> {
+      cy.visit("http://localhost:3000/pizza")
+       cy.get("[data-cy='name']").type("jacob lang")
+       cy.get("[data-cy='name']").should("have.value","jacob lang")
+       cy.get("[data-cy='nameErr']").should("not.exist")
+       sizeArr.map((n) => {
+        cy.get("[data-cy='size']").select(n)
+        cy.get("[data-cy='size']").should("have.value",n)
+        cy.get("[data-cy='sizeErr']").should("not.exist")
+      })
+      cy.get("[data-cy='top1']").click()
+      cy.get("[data-cy='top2']").click()
+      cy.get("[data-cy='top3']").click()
+      cy.get("[data-cy='top4']").click()
+      cy.get("[data-cy='special']").type("Leave by outside door")
+      cy.get("[data-cy='submit']").click()
+      cy.wait(1000).get("[data-cy='leaving']").click()
+      cy.url().should("include","/")
+    })})

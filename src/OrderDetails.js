@@ -42,13 +42,13 @@ export default function OrderDetails(props) {
         <StyledDiv>
         <Card>
             <CardTitle style = {{textDecoration : "underline"}}>
-            <Header><>Order Details</><p onClick={nav}>Click here to leave this page</p></Header>
+            <Header><>Order Details</><p data-cy = "leaving" onClick={nav}>Click here to leave this page</p></Header>
             </CardTitle>
             <CardBody>
                 <CardText>Thanks <span style = {{color : "royalblue"}}>{orderInfo.name}</span> for your order, below is the verification number</CardText>
                 <CardText style = {{color : "royalblue"}}>#{randomNum}{orderInfo.id}</CardText>
-                <div onClick={collapseOrExpand}><strong>Press to expand order details {result}</strong></div>
-                {collapse && <div style = {{transition : ".3s"}}>  <strong>Toppings :</strong>
+                <div data-cy = "expand" onClick={collapseOrExpand}><strong>Press to expand order details {result}</strong></div>
+                {collapse && <div data-cy = "visible" style = {{transition : ".3s"}}>  <strong>Toppings :</strong>
                     <div>
                         {orderInfo.toppings && orderInfo.toppings.map((n,i)=> {
                             return <li key = {i}>{n}</li>
