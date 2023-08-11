@@ -7,9 +7,15 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import OrderDetails from "./OrderDetails";
 import Home from "./Home";
+import pizzas from "./Pizza";
 
 const StyledDiv = styled.div`
-background-image : linear-gradient(to right, rgb(226, 146, 146),white);
+background-image : linear-gradient(45deg, lightblue, skyblue, white);
+display : flex;
+align-items : center;
+img {
+  height : 35px;
+}
 `
 const schema = yup.object().shape({
   name : yup.string().required("Name is required").min(2,"name must be at least 2 characters"),
@@ -19,14 +25,14 @@ const schema = yup.object().shape({
   topping3 : yup.boolean(),
   topping4 : yup.boolean(),
   special : yup.string(),
-})
-
-const App = () => {
+});
+function App() {
   //!slices of state
   const [formData,setFormData] = useState({name : "", size : "", topping1 : false, topping2 : false,
   topping3 : false,topping4 : false, special : ""})
   const [formErrors,setFormErrors] = useState({name : "", size : ""})
   const [disabled, setDisabled] = useState(true)
+  const [imgUrl,setImgUrl] = useState('')
   //!slices of state
   //!handlers
   const formValidation = (name,value) => {
@@ -53,6 +59,9 @@ const App = () => {
   useEffect(()=> {
     schema.isValid(formData).then(valid=> setDisabled(!valid))
   },[formData])
+  useEffect(()=> {
+    setImgUrl(imgUrl => imgUrl = pizzas[Math.floor(Math.random()*4)].src);
+    },[])
   //!useEffect
   const navigate = useNavigate();
   const nav = evt => {
@@ -61,7 +70,7 @@ const App = () => {
   return (
     <>
     <StyledDiv>
-          <Link to = "/">Home</Link>
+          <Link to = "/"><img src = "https://www.svgrepo.com/show/347172/menu-4.svg"/></Link>
             <h1>BloomEats</h1>
         </StyledDiv>
       <Routes>
@@ -70,9 +79,10 @@ const App = () => {
         formErrors = {formErrors}
         />}/>
         <Route path ="pizza/order-detail" element = {<OrderDetails />} />
-        <Route path = "/" element = {<Home nav = {nav}/>}/>
+        <Route path = "/" element = {<Home imgUrl = {imgUrl} nav = {nav}/>}/>
       </Routes>
     </>
-  );
+  )
 };
+
 export default App;
