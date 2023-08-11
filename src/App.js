@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import OrderDetails from "./OrderDetails";
 import Home from "./Home";
 import pizzas from "./Pizza";
+import axios from "axios";
 
 const StyledDiv = styled.div`
 background-image : linear-gradient(45deg, lightblue, skyblue, white);
@@ -26,13 +27,15 @@ const schema = yup.object().shape({
   topping4 : yup.boolean(),
   special : yup.string(),
 });
+const initialValue = {name : "", size : "", topping1 : false, topping2 : false,
+topping3 : false,topping4 : false, special : ""}
 function App() {
   //!slices of state
-  const [formData,setFormData] = useState({name : "", size : "", topping1 : false, topping2 : false,
-  topping3 : false,topping4 : false, special : ""})
-  const [formErrors,setFormErrors] = useState({name : "", size : ""})
-  const [disabled, setDisabled] = useState(true)
-  const [imgUrl,setImgUrl] = useState('')
+  const [formData,setFormData] = useState(initialValue);
+  const [formErrors,setFormErrors] = useState({name : "", size : ""});
+  const [disabled, setDisabled] = useState(true);
+  const [imgUrl,setImgUrl] = useState('');
+  const [orderInfo,setOrderInfo] = useState([]);
   //!slices of state
   //!handlers
   const formValidation = (name,value) => {
@@ -46,9 +49,22 @@ function App() {
     formValidation(name,valueToUse);
     setFormData({...formData, [name] : valueToUse}); 
   }
+  // async function postData(newOrder) {
+  //   const res = await axios.post(" https://reqres.in/api/users",newOrder)
+  //   try {
+  //     setOrderInfo([res.data,...orderInfo])
+  //     setFormData(initialValue)
+  //   } catch {
+  //     console.error(new Error)
+  //   }
+  // }
+  const navigate2 = useNavigate();
+    const nav1 = () => {
+        navigate2("pizza/order-detail")
+    }
   const submit = evt => {
     evt.preventDefault();
-    const newFriend = {
+    const newOrder = {
       name : formData.name,
       size : formData.size,
       topping1 : formData.topping1,
@@ -57,6 +73,15 @@ function App() {
       topping4 : formData.topping4,
       special : formData.special,
     }
+    axios.post(" https://reqres.in/api/users",newOrder)
+    .then((res)=> {
+      console.log(res)
+      setOrderInfo([res.data,...orderInfo])
+      nav1();
+    })
+    .catch(err=> {
+      console.error(err)
+    })
   }
   //!handlers
   //!useEffect
@@ -82,7 +107,7 @@ function App() {
         disabled ={disabled} formData = {formData} submit = {submit}
         formErrors = {formErrors}
         />}/>
-        <Route path ="pizza/order-detail" element = {<OrderDetails />} />
+        <Route path ="pizza/order-detail" element = {<OrderDetails orderInfo = {orderInfo} />} />
         <Route path = "/" element = {<Home imgUrl = {imgUrl} nav = {nav}/>}/>
       </Routes>
     </>

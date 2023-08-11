@@ -4,6 +4,16 @@ import { Link, Route, Routes } from "react-router-dom"
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { keyframes } from "styled-components"
+
+const kf = keyframes`
+50% {
+    outline-offset : .2em;
+}
+100% {
+    outline-offset : .5em;
+}
+`
 
 const StyledDiv = styled.div`
 display : flex;
@@ -19,7 +29,7 @@ form {
     display : flex;
     flex-direction : column;
     align-items : baseline;
-    padding : 10rem;
+    padding : 8rem;
     input:nth-of-type(1),input:nth-of-type(5),input:nth-of-type(6),select {
         margin-bottom : 2rem;
     }
@@ -28,10 +38,12 @@ form {
        margin-top : .2rem;
        outline : none;
        padding : .5rem;
-       outline : 2px solid lightblue; 
+       outline : 2px solid lavenderblush;
+       border-radius : 5px; 
        &:focus {
         outline-offset : 4px;
-        transition : .1s ease-in-out;
+        outline-style : dashed;
+        transition : .1s ease-out;
        }
     }
 }
@@ -40,10 +52,7 @@ form {
 export default function Pizza(props) {
     const { disabled, formData, change, submit, formErrors } = props;
     const { name, size, topping1, topping2, topping3, topping4, special } = formData;
-    const navigate = useNavigate();
-    const nav = () => {
-        navigate("order-detail")
-    }
+
     return (
         <StyledDiv>
             <div>
@@ -90,7 +99,7 @@ export default function Pizza(props) {
                     <input id="special-text" type="text" placeholder="special instructions"
                         name="special" value={special} onChange={change} />
 
-                    <input onClick={nav} disabled={disabled} type="submit" id="order-button" value="Add to Order" />
+                    <input disabled={disabled} type="submit" id="order-button" value="Add to Order" />
                 </form>
             </div>
         </StyledDiv>

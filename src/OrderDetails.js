@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
 export default function OrderDetails(props) {
+    const {orderInfo} = props;
     return (
         <div>
             order details 
