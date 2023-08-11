@@ -48,11 +48,15 @@ function App() {
   }
   const submit = evt => {
     evt.preventDefault();
-    // const newFriend = {
-    //   name : formData.name,
-    //   size : formData.size,
-    //   topping1 : formData.topping1,
-    // }
+    const newFriend = {
+      name : formData.name,
+      size : formData.size,
+      topping1 : formData.topping1,
+      topping2 : formData.topping2,
+      topping3 : formData.topping3,
+      topping4 : formData.topping4,
+      special : formData.special,
+    }
   }
   //!handlers
   //!useEffect
